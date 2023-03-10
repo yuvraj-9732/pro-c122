@@ -1,0 +1,22 @@
+<form id="chat-form">
+    <input type="text" name="user_input" placeholder="Ask a question">
+    <button type="submit">Submit</button>
+</form>
+
+<div id="chatbot-response"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#chat-form').submit(function(e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+            url: '/chatbot',
+            type: 'POST',
+            data: formData,
+            success: function(data) {
+                $('#chatbot-response').text(data.response);
+            }
+        });
+    });
+</script>
